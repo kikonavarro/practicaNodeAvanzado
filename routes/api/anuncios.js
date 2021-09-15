@@ -46,6 +46,14 @@ router.get("/", async (req, res, next) => {
 // GET
 // Lista de Tags
 
+router.get("/tags", async (req, res, next) => {
+	try {
+        const tags = await Anuncio.find().distinct('tags')
+		res.json({result: tags})
+	} catch (err) {
+		next(err);
+	}
+});
 // GET /api/anuncios:id
 // Obtener un anuncio
 

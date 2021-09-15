@@ -2,13 +2,90 @@
 
 const express = require("express");
 const router = express.Router();
-const Anuncio = require('../../models/Anuncio')
+const Anuncio = require("../../models/Anuncio");
 
-// /api/anuncios
+// GET /api/anuncios
 // devuelve una lista de anuncios
 
 router.get("/", async (req, res, next) => {
-	const anuncios = await Anuncio.find();
-	res.json({ results: anuncios });
+	try {
+        const nombre = req.query.nombre
+        const skip = parseInt(req.query.skip)
+        const limit =parseInt(req.query.limit)
+        const select = req.query.select
+
+        const filtro = {};
+
+        if (nombre) {
+            filtro.nombre = nombre;
+        }
+		const anuncios = await Anuncio.lista(filtro, skip, limit, select);
+		res.json({ results: anuncios });
+	} catch (err) {
+		next(err);
+	}
 });
+
+
+// GET 
+// Lista de Tags
+
+
+// GET /api/anuncios:id
+// Obtener un anuncio
+
+router.get("/:id", async (req, res, next) => {
+	try {
+		const _id = req.params.id;
+		const anuncio = await Anuncio.find({ _id: _id });
+		res.json({ result: anuncio });
+	} catch (err) {
+		next(err);
+	}
+});
+
+// POST /api/anuncios
+// crear un anuncio
+
+router.post('/', async(req, res, next) =>{
+    try {
+        const anuncioData = req.body;
+        const anuncio = new Anuncio(anuncioData);
+        const anuncioCreado = await anuncio.save();
+        res.status(201).json({result: anuncioCreado});
+
+    } catch (err) {
+        next(err)
+    }
+})
+
+// DELETE /api/anuncios
+// borrar un anuncio
+
+router.delete('/:id', async (req,res,next) => {
+    try {
+        const _id = req.params.id;
+        await Anuncio.deleteOne({ _id: _id});
+        res.json()
+    } catch (err) {
+        next (err)
+    }
+})
+
+// PUT /api/anuncios
+// Actualizar un anuncio
+
+router.put('/:id', async (req,res,next) => {
+    try {
+        const _id = req.params.id;
+        const anuncioData = req.body
+        const anuncioActualizado = await Anuncio.findOneAndUpdate({ _id: _id}, anuncioData, {
+            new: true // esto es para que devuelva el estado final del documento
+        });
+        res.json({anuncioActualizado})
+    } catch (err) {
+        next (err)
+    }
+})
+
 module.exports = router;

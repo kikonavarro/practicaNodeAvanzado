@@ -26,14 +26,14 @@ router.get("/", async (req, res, next) => {
 		} else if (tags) {
 			filtro.tags = tags;
 		} else if (precio) {
-			if (precio === "10-50") {
-				filtro.precio = { $gte: 10, $lte: 50 };
-			} else if (precio === "10-") {
-				filtro.precio = { $gte: 10 };
-			} else if (precio === "-50") {
-				filtro.precio = { $lte: 50 };
-			} else if (precio === "50") {
-				filtro.precio = 50;
+            let rango = precio.split('-')
+            console.log(rango)
+			if (rango[0] !== '' & rango [1] !== '') {
+				filtro.precio = { $gte: rango[0], $lte: rango[1] };
+			} else if (rango[0] !== '' & rango [1] === '')  {
+				filtro.precio = { $gte: rango[0] };
+			} else if (rango[0] === '' & rango [1] !== '')  {
+				filtro.precio = { $lte: rango[1] };
 			}
 		}
 		const anuncios = await Anuncio.lista(filtro, skip, limit, select);

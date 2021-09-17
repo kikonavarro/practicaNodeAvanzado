@@ -1,18 +1,30 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Bienvenidos a <%= title %></p>
+	<head>
+		<title><%= title %></title>
+		<link rel="stylesheet" href="/stylesheets/style.css" />
+	</head>
+	<body>
+		<h1>Bienvenidos a <%=title %></h1>
 
-    <h2>En estos momentos, disponemos de los siguientes anuncios:</h2>
+		<h2>Estos son los artículos de compra y venta que tenemos hoy:</h2>
 
-    <% anuncios.forEach(anuncio => { %>
-      <h1> <%= anuncio.nombre %> ,<%= anuncio.precio %>  </h1>
-      
-    <% }); %>
-  </body>
+		<% anuncios.forEach(anuncio => { %>
+		<h1><%= anuncio.nombre %></h1>
+		<% if (anuncio.venta == true) {%>
+		<p>Artículo en venta</p>
+		<% } else { %>
+		<p>Busco para comprar</p>
+		<% } %>
+
+		<p><%= anuncio.precio %> euros</p>
+		<p>#<%= anuncio.tags %></p>
+		<img
+			src="../images/<%= anuncio.foto %>"
+			alt="imagen producto"
+			style="max-width: 300px; max-height: 300px"
+		/>
+
+		<% }); %>
+	</body>
 </html>

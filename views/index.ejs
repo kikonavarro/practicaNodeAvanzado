@@ -6,6 +6,13 @@
   </head>
   <body>
     <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <p>Bienvenidos a <%= title %></p>
+
+    <h2>En estos momentos, disponemos de los siguientes anuncios:</h2>
+
+    <% anuncios.forEach(anuncio => { %>
+      <h1> <%= anuncio.nombre %> ,<%= anuncio.precio %>  </h1>
+      
+    <% }); %>
   </body>
 </html>

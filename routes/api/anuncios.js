@@ -20,22 +20,27 @@ router.get("/", async (req, res, next) => {
 		const filtro = {};
 
 		if (nombre) {
-			filtro.nombre = new RegExp('^' + nombre, "i");
+			filtro.nombre = new RegExp("^" + nombre, "i");
 		} else if (venta) {
 			filtro.venta = venta;
 		} else if (tags) {
 			filtro.tags = tags;
 		} else if (precio) {
-            let rango = precio.split('-')
-            console.log(rango)
-			if (rango[0] !== '' & rango [1] !== '') {
-				filtro.precio = { $gte: rango[0], $lte: rango[1] };
-			} else if (rango[0] !== '' & rango [1] === '')  {
-				filtro.precio = { $gte: rango[0] };
-			} else if (rango[0] === '' & rango [1] !== '')  {
-				filtro.precio = { $lte: rango[1] };
+			if (precio.indexOf("-") == -1) {
+				filtro.precio = precio;
+			} else {
+				let rango = precio.split("-");
+				console.log(rango);
+				if ((rango[0] !== "") & (rango[1] !== "")) {
+					filtro.precio = { $gte: rango[0], $lte: rango[1] };
+				} else if ((rango[0] !== "") & (rango[1] === "")) {
+					filtro.precio = { $gte: rango[0] };
+				} else if ((rango[0] === "") & (rango[1] !== "")) {
+					filtro.precio = { $lte: rango[1] };
+				}
 			}
 		}
+
 		const anuncios = await Anuncio.lista(filtro, skip, limit, select);
 		res.json({ results: anuncios });
 	} catch (err) {
@@ -48,8 +53,8 @@ router.get("/", async (req, res, next) => {
 
 router.get("/tags", async (req, res, next) => {
 	try {
-        const tags = await Anuncio.find().distinct('tags')
-		res.json({result: tags})
+		const tags = await Anuncio.find().distinct("tags");
+		res.json({ result: tags });
 	} catch (err) {
 		next(err);
 	}

@@ -27,6 +27,7 @@ npm install
 Para arrancar el servidor de `MongoDB` en MAC y LINUX nos situamos dentro de la carpeta donde tengamos instalado MongoDB y escribimos en la terminal:
  
 ```sh
+mkdir -p data/db
 ./bin/mongod --dbpath ./data/db
 ```
 
@@ -42,7 +43,7 @@ npm start
 ```
 La URL donde se ejecuta el producto es:
 
-http://localhost:3000/api/productos
+http://localhost:3000/api/anuncios
 
 ## Filtrado de anuncios
 Puedes filtrar los anuncios añadiendo parámetros especiales a la URL con el formato `?<query>=<valor>`
@@ -64,7 +65,7 @@ Ejemplos de parámetros de búsqueda son los siguientes:
 - `venta`: permite filtrar por anuncios de venta (=true), o anuncios de compra (=false)
 
 ## Listado de tags
-Para obtener un listado de los `Tags` existentes basta con entrar en http://localhost:3000/api/productos/tags
+Para obtener un listado de los `Tags` existentes basta con entrar en http://localhost:3000/api/anuncios/tags
 
 ## Crear un anuncio
 Si queremos crear un anuncio habrá que usar un método **POST**, para ello podemos usar herramientas como **Postman**

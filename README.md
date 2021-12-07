@@ -79,3 +79,7 @@ instalamos dotenv
 
 ## bcrypt
 Usamos esta librería para hashear la contraseña
+
+## express-session
+
+## jsonwebtoken

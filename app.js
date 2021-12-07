@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const utils = require('./lib/utils')
+const session = require('express-session')
 const LoginController = require('./controllers/loginController')
 
 var indexRouter = require('./routes/index');
@@ -24,14 +25,28 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+const loginController = new LoginController();
 
 /**
  * Rutas de mi Api
  */
 app.use('/api/anuncios', require ('./routes/api/anuncios'));
+app.post('/api/login', loginController.postJWT)
 
-const loginController = new LoginController();
+// Setup de sesiones del Website
+app.use(session({
+  name: 'nodeapi-session',
+  secret: 'CzXM~FU:B&43x[=5',
+  saveUninitialized: true,
+  resave: false,
+  cookie: {
+    maxAge: 1000 * 60 * 60 * 24 // 1 día de inactividad
+  }
+
+}))
+
 app.use('/', indexRouter);
+app.use('/privado', require('./routes/privado'))
 app.use('/users', usersRouter);
 
 app.get('/login', loginController.index)

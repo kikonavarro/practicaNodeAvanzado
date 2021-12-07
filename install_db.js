@@ -1,5 +1,6 @@
 "use strict";
 
+require('dotenv').config();
 // conexión a la base de datos
 const dbConnection = require("./lib/connectMongoose");
 // modelo de agentes

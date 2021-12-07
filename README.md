@@ -73,3 +73,9 @@ Si queremos crear un anuncio habrá que usar un método **POST**, para ello pode
 
 ## Vistas
 Hemos usado el motor `EJS` para obtener una vista de los productos de nuestro servicio e incluso si filtramos en la URL con los mismos filtros detallados anteriormente debe funcionar.
+
+## dontenv
+instalamos dotenv
+
+## bcrypt
+Usamos esta librería para hashear la contraseña

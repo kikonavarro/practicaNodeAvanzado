@@ -6,6 +6,7 @@ var logger = require('morgan');
 const utils = require('./lib/utils')
 const session = require('express-session')
 const LoginController = require('./controllers/loginController')
+const jwtAuth = require('./lib/jwtAuthMiddleware')
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -30,9 +31,12 @@ const loginController = new LoginController();
 /**
  * Rutas de mi Api
  */
-app.use('/api/anuncios', require ('./routes/api/anuncios'));
+app.use('/api/anuncios', jwtAuth, require ('./routes/api/anuncios'));
 app.post('/api/login', loginController.postJWT)
 
+// setup i18n para la internacionalización
+const i18n = require('./lib/i18nConfigure');
+app.use(i18n.init);
 // Setup de sesiones del Website
 app.use(session({
   name: 'nodeapi-session',
@@ -48,7 +52,7 @@ app.use(session({
 app.use('/', indexRouter);
 app.use('/privado', require('./routes/privado'))
 app.use('/users', usersRouter);
-
+app.use('/change-locale', require ('./routes/change-locale'))
 app.get('/login', loginController.index)
 app.post('/login', loginController.post)
 

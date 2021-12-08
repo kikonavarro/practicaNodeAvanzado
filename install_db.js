@@ -11,7 +11,7 @@ const anuncioData = require("./anunciosiniciales.json");
 
 main().catch((err) => console.log("hubo un error", err));
 
-async function main() {
+async function main() {r3
 	// inicializo la colección de anuncios
 	await initAnuncios();
 	

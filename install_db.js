@@ -3,16 +3,14 @@
 require('dotenv').config();
 // conexión a la base de datos
 const dbConnection = require("./lib/connectMongoose");
-// modelo de agentes
-//const Anuncio = require("./models/Anuncio");
-//const Usuario = require("./models/Usuario");
+
 const { Anuncio, Usuario } = require("./models");
 const anuncioData = require("./anunciosiniciales.json");
 
 main().catch((err) => console.log("hubo un error", err));
 
-async function main() {r3
-	// inicializo la colección de anuncios
+async function main() {
+// inicializo la colección de anuncios
 	await initAnuncios();
 	
 	// inicializo la colección de usuarios

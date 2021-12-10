@@ -49,12 +49,19 @@ app.use(session({
 
 }))
 
+app.use((req, res, next) => {
+  res.locals.session = req.session;
+  next();
+});
+
 app.use('/', indexRouter);
 app.use('/privado', require('./routes/privado'))
 app.use('/users', usersRouter);
 app.use('/change-locale', require ('./routes/change-locale'))
 app.get('/login', loginController.index)
 app.post('/login', loginController.post)
+app.get('/logout', loginController.logout);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

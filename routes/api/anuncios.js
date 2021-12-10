@@ -3,7 +3,15 @@
 const express = require("express");
 const router = express.Router();
 const Anuncio = require("../../models/Anuncio");
-
+const multer = require("multer");
+const thumbnailRequester = require("../thumbnailRequester");
+const storage = multer.diskStorage({
+	destination: "./public/images/",
+	filename: function (req, file, cb) {
+		cb(null, file.originalname);
+	},
+});
+const upload = multer({ storage: storage });
 // GET /api/anuncios
 // devuelve una lista de anuncios
 
@@ -75,9 +83,11 @@ router.get("/:id", async (req, res, next) => {
 // POST /api/anuncios
 // crear un anuncio
 
-router.post("/", async (req, res, next) => {
+router.post("/", upload.single("foto"), async (req, res, next) => {
 	try {
 		const anuncioData = req.body;
+		anuncioData.foto = req.file.originalname;
+		thumbnailRequester(anuncioData.foto);
 		const anuncio = new Anuncio(anuncioData);
 		const anuncioCreado = await anuncio.save();
 		res.status(201).json({ result: anuncioCreado });

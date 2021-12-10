@@ -34,6 +34,17 @@ class LoginController {
 			next(err);
 		}
 	}
+
+    logout(req, res, next) {
+        req.session.regenerate(err => {
+          if (err) {
+            next(err);
+            return;
+          }
+          res.redirect('/');
+        })
+      }
+    
     // POST /api/login
     async postJWT(req, res, next) {
         try {

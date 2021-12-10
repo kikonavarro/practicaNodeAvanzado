@@ -2,7 +2,7 @@ var express = require("express");
 var router = express.Router();
 
 /* GET /privado */
-router.get("/privado", function (req, res, next) {
+router.get("/", function (req, res, next) {
 	
     if (!req.session.usuarioLogado) {
         res.redirect('/login')

@@ -31,7 +31,7 @@ const loginController = new LoginController();
 /**
  * Rutas de mi Api
  */
-app.use('/api/anuncios', jwtAuth, require ('./routes/api/anuncios'));
+app.use('/api/anuncios', require ('./routes/api/anuncios'));
 app.post('/api/login', loginController.postJWT)
 
 // setup i18n para la internacionalización

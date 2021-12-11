@@ -3,6 +3,7 @@
 const express = require("express");
 const router = express.Router();
 const Anuncio = require("../../models/Anuncio");
+const jwtAuth = require("../../lib/jwtAuthMiddleware");
 const multer = require("multer");
 const thumbnailRequester = require("../thumbnailRequester");
 const storage = multer.diskStorage({
@@ -15,7 +16,7 @@ const upload = multer({ storage: storage });
 // GET /api/anuncios
 // devuelve una lista de anuncios
 
-router.get("/", async (req, res, next) => {
+router.get("/", jwtAuth, async (req, res, next) => {
 	try {
 		const nombre = req.query.nombre;
 		const venta = req.query.venta;
@@ -87,6 +88,7 @@ router.post("/", upload.single("foto"), async (req, res, next) => {
 	try {
 		const anuncioData = req.body;
 		anuncioData.foto = req.file.originalname;
+		console.log(req.file,'req file', req.file.path)
 		thumbnailRequester(anuncioData.foto);
 		const anuncio = new Anuncio(anuncioData);
 		const anuncioCreado = await anuncio.save();

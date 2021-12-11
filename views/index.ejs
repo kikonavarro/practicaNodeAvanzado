@@ -9,18 +9,18 @@
  <% include navBar.html %> 
  
  	<body>
-		<div class="container px-5">
+		<div class="container-fluid">
 			<h1><%= __('Welcome to')  %> <%=title %></h1>
 
 			<h2><%= __('These are the products that we have today:') %> </h2>
-
+			<div class="card-group">
 			<% anuncios.forEach(anuncio => { %>
-			<div class="col-lg-2">
-				<h1><%= anuncio.nombre %></h1>
+			<div class="card">
+				<h3><%= anuncio.nombre %></h3>
 				<% if (anuncio.venta == true) {%>
-				<p>Artículo en venta</p>
+				<p><%= __('On sale')  %> </p>
 				<% } else { %>
-				<p>Busco para comprar</p>
+				<p><%= __('Want it!')  %></p>
 				<% } %>
 
 				<p><%= anuncio.precio %> euros</p>
@@ -32,7 +32,8 @@
 				/>
 			</div>
 			<% }); %>
-
-		</div> 
+			</div>
+		</div>
+		<% include footer.html %> 
 	</body>
 </html>

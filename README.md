@@ -1,7 +1,7 @@
 # Nodepop
 Práctica de NodeJS, Express y mongoDB del Bootcamp de Keepcoding
 
-## Objetivo
+## Objetivo Práctica Primera
 
 - Desarrollar una API que se ejecutará en el servidor de un servicio de venta de artículos llamado Nodepop en el que hay tanto anuncios de compra como de venta y permite buscar por distintos criterios.
 - La API debe hacer lo siguiente:
@@ -9,6 +9,12 @@ Práctica de NodeJS, Express y mongoDB del Bootcamp de Keepcoding
   - Listar los tags existentes
   - Posibilidad de crear anuncios
 - Los sistemas donde se desplegará la API utilizan bases de datos de MongoDB
+
+## Objetivo Práctica Segunda
+
+- Autenticación: implementamos autenticación JWT al API. El API tiene un usuario con email user@example.com y clave 1234
+- Internacionalización: el frontend se puede cambiar de idioma a español o inglés.
+- Subida de imagen con tarea en background: hemos creado un microservicio con `cote`que con la ayuda de la librería `jimp`nos permite a la hora de crear anuncios con un post, transformar las imágenes en thumbnails.
 ## Inicializar
 
 Descargamos el repositorio, por ejemplo con SSH o HTTPS:
@@ -45,6 +51,12 @@ La URL donde se ejecuta el producto es:
 
 http://localhost:3000/api/anuncios
 
+## Arrancamos el microservicio par la creación de thumbnail
+
+```sh
+nodemon thumbnailCreator.js
+```
+
 ## Filtrado de anuncios
 Puedes filtrar los anuncios añadiendo parámetros especiales a la URL con el formato `?<query>=<valor>`
 
@@ -74,12 +86,3 @@ Si queremos crear un anuncio habrá que usar un método **POST**, para ello pode
 ## Vistas
 Hemos usado el motor `EJS` para obtener una vista de los productos de nuestro servicio e incluso si filtramos en la URL con los mismos filtros detallados anteriormente debe funcionar.
 
-## dontenv
-instalamos dotenv
-
-## bcrypt
-Usamos esta librería para hashear la contraseña
-
-## express-session
-
-## jsonwebtoken

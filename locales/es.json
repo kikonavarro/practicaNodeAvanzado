@@ -1,8 +1,15 @@
 {
 	"Welcome to": "Bienvenido a",
 	"These are the products that we have today:": "Estos son los productos que tenemos hoy:",
-	"Features": "Features",
-	"Login": "Login",
+	"Login": "Iniciar Sesión",
 	"Private": "Private",
-	"Logout": "Logout"
+	"Logout": "Cerrar Sesión",
+	"On sale": "En venta",
+	"Want to buy": "Quiero comprar",
+	"Want it!": "Lo quiero!",
+	"@ 2021 All Rights Reserved": "@ 2021 Todos los Derechos Reservados",
+	"Email address": "Dirección de email",
+	"We'll never share your email with anyone else.": "No compartiremos tu email con nadie más",
+	"Password": "Contraseña",
+	"Submit": "Enviar"
 }

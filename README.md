@@ -15,6 +15,7 @@ Práctica de NodeJS, Express y mongoDB del Bootcamp de Keepcoding
 - Autenticación: implementamos autenticación JWT al API. El API tiene un usuario con email user@example.com y clave 1234
 - Internacionalización: el frontend se puede cambiar de idioma a español o inglés.
 - Subida de imagen con tarea en background: hemos creado un microservicio con `cote`que con la ayuda de la librería `jimp`nos permite a la hora de crear anuncios con un post, transformar las imágenes en thumbnails.
+- Implementar testing
 ## Inicializar
 
 Descargamos el repositorio, por ejemplo con SSH o HTTPS:
@@ -86,3 +87,5 @@ Si queremos crear un anuncio habrá que usar un método **POST**, para ello pode
 ## Vistas
 Hemos usado el motor `EJS` para obtener una vista de los productos de nuestro servicio e incluso si filtramos en la URL con los mismos filtros detallados anteriormente debe funcionar.
 
+## Test
+Instalamos jest y usamos la librería `supertest`(PARTE NO COMPLETA)
